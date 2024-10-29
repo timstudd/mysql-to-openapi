@@ -17,7 +17,7 @@ connection.connect((err) => {
   const dbName = process.env.DB_NAME;
 
   const query = `
-    SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, DATA_TYPE, IS_NULLABLE, COLUMN_KEY
+    SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, DATA_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_COMMENT
     FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA = ?
     ORDER BY TABLE_NAME, ORDINAL_POSITION
@@ -31,6 +31,7 @@ connection.connect((err) => {
     results.forEach((row) => {
       const tableName = row.TABLE_NAME;
       const columnName = row.COLUMN_NAME;
+      const columnComment = row.COLUMN_COMMENT;
       const dataType = row.DATA_TYPE;
       const allowNull = row.IS_NULLABLE === "YES";
 
@@ -44,6 +45,7 @@ connection.connect((err) => {
       openapiDefinitions[tableName].properties[columnName] = {
         type: dataType,
         ...(allowNull ? { "x-nullable": true } : {}),
+        ...(columnComment ? { description: columnComment } : {}),
       };
     });
 
