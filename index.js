@@ -277,11 +277,11 @@ connection.connect((err) => {
         ...(allowNull ? { "x-nullable": true } : {}),
       };
 
-      if (!openapiPaths.hasOwnProperty(tableName)) {
-        const lowerCaseTableName = tableName.toLowerCase();
-        const paths = createBasicPathDefinition(lowerCaseTableName);
-        Object.assign(openapiPaths, paths);
-      }
+      //   if (!openapiPaths.hasOwnProperty(tableName)) {
+      //     const lowerCaseTableName = tableName.toLowerCase();
+      //     const paths = createBasicPathDefinition(lowerCaseTableName);
+      //     Object.assign(openapiPaths, paths);
+      //   }
     });
 
     const openapiOutput = {
