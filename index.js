@@ -44,7 +44,7 @@ connection.connect((err) => {
 
       openapiDefinitions[tableName].properties[columnName] = {
         type: dataType,
-        ...(allowNull ? { required: false } : {}),
+        ...(allowNull ? { required: false } : { required: true }),
         ...(columnComment ? { description: columnComment } : {}),
       };
     });
