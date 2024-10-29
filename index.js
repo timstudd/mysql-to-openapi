@@ -12,6 +12,8 @@ const connection = mysql.createConnection({
 });
 
 function toCamelCase(str) {
+  return str;
+
   if (str.toLowerCase() === "id") {
     return "ID";
   }
