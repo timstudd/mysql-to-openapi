@@ -17,7 +17,7 @@ connection.connect((err) => {
   const dbName = process.env.DB_NAME;
 
   const query = `
-    SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, DATA_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_COMMENT
+    SELECT TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, DATA_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_COMMENT, COLUMN_DEFAULT
     FROM INFORMATION_SCHEMA.COLUMNS
     WHERE TABLE_SCHEMA = ?
     ORDER BY TABLE_NAME, ORDINAL_POSITION
@@ -32,8 +32,11 @@ connection.connect((err) => {
       const tableName = row.TABLE_NAME;
       const columnName = row.COLUMN_NAME;
       const columnComment = row.COLUMN_COMMENT;
+      const columnDefault = row.COLUMN_DEFAULT;
+      const columnType = row.COLUMN_TYPE;
       const dataType = row.DATA_TYPE;
       const allowNull = row.IS_NULLABLE === "YES";
+      const isEnum = dataType == "enum";
 
       if (!openapiDefinitions[tableName]) {
         openapiDefinitions[tableName] = {
@@ -44,8 +47,17 @@ connection.connect((err) => {
 
       openapiDefinitions[tableName].properties[columnName] = {
         type: dataType,
+        ...(isEnum
+          ? {
+              enum: columnType
+                .slice(5, columnType.length - 1)
+                .split(",")
+                .map((v) => v.replace(/^'|'$/g, "")),
+            }
+          : {}),
         ...(allowNull ? { required: false } : { required: true }),
         ...(columnComment ? { description: columnComment } : {}),
+        ...(columnDefault ? { default: columnDefault } : {}),
       };
     });
 
