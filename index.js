@@ -246,31 +246,31 @@ connection.connect((err) => {
         },
       };
 
-      openapiDefinitions[`${camelTableName}Request`] = {
-        type: "object",
-        description: `An array of ${camelTableName} objects`,
-        properties: {
-          Data: {
-            type: "array",
-            items: {
-              $ref: `#/definitions/${camelTableName}`,
-            },
-          },
-        },
-      };
+      //   openapiDefinitions[`${camelTableName}Request`] = {
+      //     type: "object",
+      //     description: `An array of ${camelTableName} objects`,
+      //     properties: {
+      //       Data: {
+      //         type: "array",
+      //         items: {
+      //           $ref: `#/definitions/${camelTableName}`,
+      //         },
+      //       },
+      //     },
+      //   };
 
-      openapiDefinitions[`${camelTableName}Response`] = {
-        type: "object",
-        description: `An array of ${camelTableName} objects`,
-        properties: {
-          Data: {
-            type: "array",
-            items: {
-              $ref: `#/definitions/${camelTableName}`,
-            },
-          },
-        },
-      };
+      //   openapiDefinitions[`${camelTableName}Response`] = {
+      //     type: "object",
+      //     description: `An array of ${camelTableName} objects`,
+      //     properties: {
+      //       Data: {
+      //         type: "array",
+      //         items: {
+      //           $ref: `#/definitions/${camelTableName}`,
+      //         },
+      //       },
+      //     },
+      //   };
 
       openapiDefinitions[camelTableName].properties[columnName] = {
         type: dataType,
