@@ -58,6 +58,7 @@ function toCamelCase(str) {
 }
 
 function mapDataType(dataType) {
+  return dataType;
   switch (dataType) {
     case "tinyint":
     case "smallint":
