@@ -221,30 +221,30 @@ connection.connect((err) => {
         };
       }
 
-      openapiParameters[`${camelTableName}Request`] = {
-        description: `An array of new ${camelTableName} records`,
-        in: "body",
-        name: `${camelTableName.toLowerCase()}Request`,
-        required: true,
-        schema: {
-          $ref: `#/definitions/${camelTableName}Request`,
-        },
-      };
+      //   openapiParameters[`${camelTableName}Request`] = {
+      //     description: `An array of new ${camelTableName} records`,
+      //     in: "body",
+      //     name: `${camelTableName.toLowerCase()}Request`,
+      //     required: true,
+      //     schema: {
+      //       $ref: `#/definitions/${camelTableName}Request`,
+      //     },
+      //   };
 
-      openapiResponses[`${camelTableName}Response`] = {
-        description: `${camelTableName} Response Object`,
-        headers: {
-          "Access-Control-Allow-Origin": {
-            type: "string",
-          },
-          "Cache-Control": {
-            type: "string",
-          },
-        },
-        schema: {
-          $ref: `#/definitions/${camelTableName}Response`,
-        },
-      };
+      //   openapiResponses[`${camelTableName}Response`] = {
+      //     description: `${camelTableName} Response Object`,
+      //     headers: {
+      //       "Access-Control-Allow-Origin": {
+      //         type: "string",
+      //       },
+      //       "Cache-Control": {
+      //         type: "string",
+      //       },
+      //     },
+      //     schema: {
+      //       $ref: `#/definitions/${camelTableName}Response`,
+      //     },
+      //   };
 
       //   openapiDefinitions[`${camelTableName}Request`] = {
       //     type: "object",
